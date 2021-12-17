@@ -8,7 +8,6 @@ let score = 0;
 // //Game Functions
 function main(ctime) {
   window.requestAnimationFrame(main);
-  // console.log(ctime);
   if ((ctime - lastPaintTime) / 1000 < 1 / speed) {
     return;
   }
@@ -45,7 +44,7 @@ function gameEngine() {
     scoreBox.innerHTML="Score : " + score;
   }
 
-  // snake getting bigger by eating food
+  //Snake getting bigger by eating food
   if (snakeArr[0].x === food.x && snakeArr[0].y === food.y) {
     score+=1;
     if(score>hiscoreval){
@@ -65,7 +64,9 @@ function gameEngine() {
       y: Math.round(a + (b - a) * Math.random())
     };
   }
-  //moving the sanke
+
+
+  //Moving the sanke
 
   for (let i = snakeArr.length - 2; i >= 0; i--) {
     snakeArr[i + 1] = { ...snakeArr[i] };
@@ -77,14 +78,15 @@ function gameEngine() {
 
   board.innerHTML = "";
   
-  //FOOD DISPLAY
+  //Displaying the food
   foodElement = document.createElement("div");
   foodElement.style.gridRowStart = food.y;
   foodElement.style.gridColumnStart = food.x;
   foodElement.classList.add("foodi");
   board.appendChild(foodElement);
 
-  //display the snake
+
+  //Displaying the snake
   snakeArr.forEach((e, index) => {
     snakeElement = document.createElement("div");
     snakeElement.style.gridRowStart = e.y;
@@ -97,8 +99,9 @@ function gameEngine() {
     board.appendChild(snakeElement);
   });
 }
-// logic
 
+
+// logic
 let hiscore=localStorage.getItem("hiscore");
 if(hiscore === null){
   hiscoreval=0;
@@ -114,25 +117,21 @@ window.addEventListener("keydown", (e) => {
    inputDir = { x: 0, y: 1 };
   switch (e.key) {
     case "ArrowUp":
-      console.log("Arrow up");
       inputDir.x = 0;
       inputDir.y = -1;
       break;
 
     case "ArrowDown":
-      console.log("Arrow down");
       inputDir.x = 0;
       inputDir.y = 1;
       break;
 
     case "ArrowLeft":
-      console.log("Arrow left");
       inputDir.x = -1;
       inputDir.y = 0;
       break;
 
     case "ArrowRight":
-      console.log("Arrow right");
       inputDir.x = 1;
       inputDir.y = 0;
       break;
